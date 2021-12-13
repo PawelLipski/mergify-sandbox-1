@@ -1,0 +1,39 @@
+queue_rules:
+  - name: default
+    conditions:
+      - check-success=build
+
+pull_request_rules:
+  - name: Automatic merge on approval
+    conditions:
+      - "#approved-reviews-by>=1"
+      - base=develop
+      - check-success=build
+      - -draft
+      - label=mergeable
+      - -title~=WIP
+    actions:
+      queue:
+        name: default
+        method: squash
+
+  - name: Assign reviews to @PawelLipski
+    conditions:
+      - -closed
+      - or:
+        - files=^ci/
+        - files=^deploy/
+        - files=^dev/
+        - files=^infra/
+        - files=^Jenkinsfile
+        - files=^k8s-operations/
+        - files=\.md$
+        - files=^project/
+        - files=\.sbt$
+        - files=\.sh$
+        - files=\.yaml$
+        - files=\.yml$
+    actions:
+      request_reviews:
+        users:
+          - PawelLipski
