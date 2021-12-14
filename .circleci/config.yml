@@ -1,5 +1,3 @@
-# bar
-# bar
 version: 2.1
 jobs:
   sleep:
@@ -15,5 +13,3 @@ workflows:
   say-hello-workflow:
     jobs:
       - sleep
-# fooo
-# fooo

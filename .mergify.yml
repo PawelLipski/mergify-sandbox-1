@@ -1,30 +1,24 @@
 queue_rules:
   - name: default
-    conditions:
-      - "check-success=ci/circleci: sleep"
+    conditions: []
 
 pull_request_rules:
   - name: Automatic merge on approval
     conditions:
       - base=main
-      - "check-success=ci/circleci: sleep"
-      - -draft
+#      - "check-success=ci/circleci: sleep"
+#      - -draft
       - label=mergeable
-      - -title~=WIP
     actions:
       queue:
         name: default
         method: squash
 
-  - name: Assign reviews to @PawelLipski
+  - name: Assign reviews to @git-machete-bot
     conditions:
       - files~=\.yml$
     actions:
       assign:
-        add_users:
-          - git-machete-bot
-          - PawelLipski
       request_reviews:
         users:
           - git-machete-bot
-          - PawelLipski
