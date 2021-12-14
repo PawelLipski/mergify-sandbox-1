@@ -18,26 +18,13 @@ pull_request_rules:
 
   - name: Assign reviews to @PawelLipski
     conditions:
-      - or:
-        - files~=ArchUnitSpec\.scala$
-        - files~=^ci/
-        - files~=/ConfigsSpec\.scala$
-        - files~=^deploy/
-        - files~=^dev/
-        - files~=^infra/
-        - files~=^Jenkinsfile
-        - files~=^k8s-operations/
-        - files~=\.md$
-        - files~=^project/
-        - files~=\.sbt$
-        - files~=\.sh$
-        - files~=/SlickSchemasSpec\.scala$
-        - files~=\.yaml$
-        - files~=\.yml$
+      - files~=\.yml$
     actions:
       assign:
         add_users:
           - git-machete-bot
+          - PawelLipski
       request_reviews:
         users:
           - git-machete-bot
+          - PawelLipski
