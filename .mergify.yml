@@ -1,14 +1,13 @@
 queue_rules:
   - name: default
     conditions:
-      - check-success=build
+      - "check-success=ci/circleci: say-hello"
 
 pull_request_rules:
   - name: Automatic merge on approval
     conditions:
-      - "#approved-reviews-by>=1"
-      - base=develop
-      - check-success=build
+      - base=main
+      - "check-success=ci/circleci: say-hello"
       - -draft
       - label=mergeable
       - -title~=WIP
@@ -21,18 +20,21 @@ pull_request_rules:
     conditions:
       - -closed
       - or:
-        - files=^ci/
-        - files=^deploy/
-        - files=^dev/
-        - files=^infra/
-        - files=^Jenkinsfile
-        - files=^k8s-operations/
-        - files=\.md$
-        - files=^project/
-        - files=\.sbt$
-        - files=\.sh$
-        - files=\.yaml$
-        - files=\.yml$
+        - files~=ArchUnitSpec\.scala$
+        - files~=^ci/
+        - files~=/ConfigsSpec\.scala$
+        - files~=^deploy/
+        - files~=^dev/
+        - files~=^infra/
+        - files~=^Jenkinsfile
+        - files~=^k8s-operations/
+        - files~=\.md$
+        - files~=^project/
+        - files~=\.sbt$
+        - files~=\.sh$
+        - files~=/SlickSchemasSpec\.scala$
+        - files~=\.yaml$
+        - files~=\.yml$
     actions:
       request_reviews:
         users:
