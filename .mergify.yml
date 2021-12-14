@@ -6,13 +6,11 @@ pull_request_rules:
   - name: Automatic merge on approval
     conditions:
       - base=main
-#      - "check-success=ci/circleci: sleep"
-#      - -draft
       - label=mergeable
     actions:
       queue:
         name: default
-        method: squash
+        method: merge
 
   - name: Assign reviews to @git-machete-bot
     conditions:
