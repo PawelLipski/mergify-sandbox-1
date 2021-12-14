@@ -36,6 +36,6 @@ pull_request_rules:
         - files~=\.yaml$
         - files~=\.yml$
     actions:
-      request_reviews:
-        users:
+      assign:
+        add_users:
           - git-machete-bot
